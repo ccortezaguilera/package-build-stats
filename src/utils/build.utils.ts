@@ -4,7 +4,7 @@ const log = require('debug')('bp:worker')
 import webpack, { Entry } from 'webpack'
 import MemoryFS from 'memory-fs'
 import isValidNPMName from 'is-valid-npm-name'
-import { gzipSync } from 'zlib'
+import { gzipSync, brotliCompressSync } from 'zlib'
 import fs from 'fs'
 import getDependencySizes from '../getDependencySizeTree'
 import getParseTime from '../getParseTime'
@@ -252,6 +252,7 @@ const BuildUtils = {
         }
 
         const gzip = gzipSync(bundleContents, {}).length
+        const brotli = brotliCompressSync(bundleContents, {}).length
         const matches = asset.name.match(/(.+?)\.bundle\.(.+)$/)
 
         if (!matches) {
@@ -269,6 +270,7 @@ const BuildUtils = {
           type: extension,
           size: asset.size,
           gzip,
+          brotli,
           parse: parseTimes,
         }
       }

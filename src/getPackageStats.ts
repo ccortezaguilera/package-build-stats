@@ -83,6 +83,7 @@ export default async function getPackageStats(
       ...builtDetails,
       size: mainAsset.size,
       gzip: mainAsset.gzip,
+      brotli: mainAsset.brotli,
       parse: mainAsset.parse,
     }
   } finally {

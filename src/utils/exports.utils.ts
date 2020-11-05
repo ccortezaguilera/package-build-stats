@@ -189,7 +189,7 @@ export function getExportsDetails(code: string) {
         }
       } else {
         specifiers.forEach(specifier => {
-          exportsList.push(specifier.exported.name)
+          exportsList.push(specifier.exported.type)
         })
       }
     },
